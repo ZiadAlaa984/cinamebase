@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Genres } from "@/APIS/Filter";
 import { useQuery } from "@tanstack/react-query";
 import Heading from "./Heading";
+import Loading from "../ui/loading";
 
 interface Genre {
   id: number;
@@ -36,11 +37,7 @@ export default function Filter({
       <Heading text={title || ""} />
 
       {/* Loading state */}
-      {isLoading && (
-        <div className="flex justify-center py-4">
-          <div className="animate-pulse text-gray-400">Loading genres...</div>
-        </div>
-      )}
+      {isLoading && <Loading />}
 
       {/* Error state */}
       {isError && (
@@ -59,7 +56,7 @@ export default function Filter({
           >
             <Button
               variant="outline"
-              className="px-3 py-2 xl:px-12 xl:py-4 text-sm md:text-xl font-medium rounded-full"
+              className="  text-black dark:text-white text-base md:text-[20px] font-medium rounded-full"
             >
               {genre.name}
             </Button>

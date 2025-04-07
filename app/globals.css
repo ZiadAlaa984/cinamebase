@@ -127,3 +127,22 @@ html {
     transform: rotate(360deg);
   }
 }
+html,
+body {
+  /* Enable scrolling but hide scrollbars */
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+/* For Chrome, Safari, and Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+.p-main {
+  @apply md:py-[40px] py-[80px];
+}
+.main {
+  @apply max-w-screen-xl py-2 px-[15px]  sm:px-[16px] sm:py-3 mx-auto;
+}

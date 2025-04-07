@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Input } from "../ui/input";
 import { SearchData } from "@/APIS/APIS";
 import debounce from "debounce";
@@ -8,12 +8,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { SearchItem } from "@/interface/Types";
+import { cn } from "@/lib/utils";
 
 export const Search = ({
+  className,
   kind,
+
   setModel,
 }: {
+  className?: string;
   kind: string;
+
   setModel: (value: boolean) => void;
 }) => {
   const [value, setValue] = useState("");
@@ -31,7 +36,7 @@ export const Search = ({
     () =>
       debounce((searchTerm: string) => {
         setValue(searchTerm);
-      }, 500),
+      }, 600),
     []
   );
 
@@ -39,7 +44,7 @@ export const Search = ({
     <div className="relative">
       <Input
         type="text"
-        className="placeholder:ps-4 my-2"
+        className="placeholder:ps-4 placeholder:text-white dark:text-white  my-2"
         placeholder={`Search ${kind}`}
         onChange={(e) => handleInputChange(e.target.value)}
       />
@@ -51,7 +56,12 @@ export const Search = ({
       )}
       {error && <div>Error: {error.message}</div>}
 
-      <div className="grid grid-cols-3 overflow-y-auto max-h-[400px] gap-4 mt-4">
+      <div
+        className={cn(
+          "grid grid-cols-2 sm:grid-cols-3 overflow-y-auto md:max-h-[400px] max-h-[300px] gap-4 mt-1",
+          className
+        )}
+      >
         {data?.results?.map((item) => {
           if (!item.poster_path) return null;
 
@@ -71,7 +81,7 @@ export const Search = ({
                   height={100}
                   className="w-full h-[200px] object-cover"
                 />
-                <div className="p-1 text-xs">
+                <div className="p-1 text-[10px]">
                   {(item.title || item.name || "Untitled")
                     .split(" ")
                     .slice(0, 2)

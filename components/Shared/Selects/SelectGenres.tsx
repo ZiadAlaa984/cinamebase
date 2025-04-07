@@ -13,8 +13,12 @@ import {
 import { useEffect, useState } from "react";
 export default function SelectGenres({
   setType,
+  Title,
   kind,
+  value,
 }: {
+  value?: string;
+  Title: string;
   kind: string;
   setType: (value: string) => void;
 }) {
@@ -27,23 +31,25 @@ export default function SelectGenres({
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await Genres(kind);
+        const res = await Genres(Title || kind);
         setGenres(res.genres);
+        console.log("🚀 ~ fetchData ~ res.genres:", res.genres);
       } catch {
         console.log("Error fetching genres. Please try again later.");
       }
     }
+
     fetchData();
-  }, [kind]);
+  }, [kind, Title]);
   return (
     <>
       <Select onValueChange={(value: string) => setType(value)}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a Genres" />
+          <SelectValue placeholder={value || `Select a Genres`} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Types</SelectLabel>
+            <SelectLabel>Genres</SelectLabel>
             {genres.map((genre: genres, index) => (
               <SelectItem key={index} value={genre.id}>
                 {genre.name}

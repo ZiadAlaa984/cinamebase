@@ -1,18 +1,12 @@
 "use client";
 import { TVSeries } from "@/interface/Types";
 import ItemSerie from "./ItemSerie";
-const ItemsSeries = ({
-  Series,
-  Main,
-}: {
-  Main?: string;
-  Series: TVSeries[];
-}) => {
+const ItemsSeries = ({ Series }: { Series: TVSeries[] }) => {
   return (
-    <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {Series.map((Serie, index) =>
-        Main === "Series" ? <ItemSerie Serie={Serie} key={index} /> : null
-      )}
+    <div className="mt-4 grid grid-cols-2  sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
+      {Series.map((Serie, index) => (
+        <ItemSerie Serie={Serie} key={index} />
+      ))}
     </div>
   );
 };

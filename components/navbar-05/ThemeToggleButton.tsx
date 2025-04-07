@@ -23,7 +23,11 @@ const ThemeToggleButton = () => {
   }
 
   return (
-    <Button size="icon" className="rounded-full" onClick={toggleTheme}>
+    <Button
+      size="icon"
+      className="rounded-full bg-red-500 "
+      onClick={toggleTheme}
+    >
       {resolvedTheme === "dark" ? <SunIcon /> : <MoonIcon />}
     </Button>
   );

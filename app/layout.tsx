@@ -31,7 +31,7 @@ export default function RootLayout({
         >
           <QueryProvider>
             <Navbar />
-            <div className="max-w-screen-xl mx-auto ">{children}</div>
+            <div className="">{children}</div>
           </QueryProvider>
         </ThemeProvider>
       </body>

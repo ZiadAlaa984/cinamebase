@@ -22,7 +22,7 @@ export default function SelectShared({
   return (
     <>
       <Select onValueChange={(value: string) => setType(value)}>
-        <SelectTrigger className="w-[180px] bg-white">
+        <SelectTrigger className="w-[180px] text-white bg-white">
           <SelectValue placeholder="Select a Type" />
         </SelectTrigger>
         <SelectContent>

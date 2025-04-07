@@ -4,11 +4,13 @@ import Main from "@/components/Shared/Main/Main";
 
 export default function Home() {
   return (
-    <>
-      <Hero />
-      <Filter kind={"tv"} title={"Filter Series By Genres"} />
-      <Filter kind={"movie"} title={"Filter Movies By Genres"} />
-      <Main Main={"Movies"} kind={"movie"} />
-    </>
+    <div className="main">
+      <div className="p-main">
+        <Hero />
+        <Filter kind={"tv"} title={"Filter Series By Genres"} />
+        <Filter kind={"movie"} title={"Filter Movies By Genres"} />
+        <Main Main={"Movies"} kind={"movie"} />
+      </div>
+    </div>
   );
 }

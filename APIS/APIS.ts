@@ -9,19 +9,13 @@ export const fetchFn = async (url: string) =>
   }).then((res) => res.json());
 
 // fetch DATA Movie or Series
-export const Data = async (page = 1, type = "airing_today", kind = "tv") => {
-  return await fetchFn(
-    `https://api.themoviedb.org/3/${kind}/${type}?language=en-US&page=${page}`
-  );
-};
-// fetch DATA Movie or Series
 export const SearchData = async (params: string, kind: string) => {
   return await fetchFn(
     `https://api.themoviedb.org/3/search/${kind}?query=${params}&language=en-US&page=1`
   );
 };
 
-export const Cast = async (id: string, kind = "tv") => {
+export const CastData = async (id: string, kind = "tv") => {
   return await fetchFn(`https://api.themoviedb.org/3/${kind}/${id}/credits`);
 };
 export const SearchById = async (id: string, kind = "movie") => {
@@ -35,5 +29,26 @@ export const getImageLogo = async (id: string, kind = "movie") => {
 export const Recommended = async (id: string, kind = "tv") => {
   return await fetchFn(
     `https://api.themoviedb.org/3/${kind}/${id}/recommendations`
+  );
+};
+export const Video = async (id: string, kind = "tv") => {
+  return await fetchFn(
+    `https://api.themoviedb.org/3/${kind}/${id}/videos?language=en-US`
+  );
+};
+export const Trending = async (page = 1, time = "day", kind = "tv") => {
+  return await fetchFn(
+    `https://api.themoviedb.org/3/trending/${kind}/${time}?language=en-US&page=${page}`
+  );
+};
+// fetch DATA Movie or Series
+export const Data = async (page = 1, type = "airing_today", kind = "tv") => {
+  return await fetchFn(
+    `https://api.themoviedb.org/3/${kind}/${type}?language=en-US&page=${page}`
+  );
+};
+export const searchByGenres = async (kind = "movie", gen: string, page = 1) => {
+  return await fetchFn(
+    `https://api.themoviedb.org/3/discover/${kind}?with_genres=${gen}&language=en-US&page=${page}`
   );
 };

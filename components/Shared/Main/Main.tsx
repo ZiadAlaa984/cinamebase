@@ -1,27 +1,37 @@
 "use client";
 
-import { Movie, TVSeries } from "@/interface/Types";
+import { Suspense } from "react";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+
+import { Movie, TVSeries } from "@/interface/Types";
 import Heading from "../Heading";
 import ItemsSeries from "../Items/ItemsSeries";
-import { Data } from "@/APIS/APIS";
+import { Data, searchByGenres } from "@/APIS/APIS";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import SelectShared from "../Select";
 import Loader from "../loader";
 import ItemsMovie from "../Items/ItemsMovie";
+import SelectType from "../Selects/SelectType";
+import SelectGenres from "../Selects/SelectGenres";
 
-export default function Main({
+// ✨ This child component is now safe to use `useSearchParams`
+function MainContent({
   Main,
   kind,
-  title,
+  explore,
 }: {
+  explore?: boolean;
   Main?: string;
-  title?: string;
   kind?: string;
 }) {
-  const [type, setType] = useState("popular");
+  const searchParams = useSearchParams();
+  const [type, setType] = useState("top_rated");
+  const [Title, setTitle] = useState(
+    searchParams.get("kind") || kind || "movie"
+  );
+  const [Genres, setGenres] = useState(searchParams.get("id") || "");
 
-  // Use infinite query for pagination
   const {
     data,
     fetchNextPage,
@@ -30,39 +40,54 @@ export default function Main({
     isLoading,
     isError,
   } = useInfiniteQuery({
-    queryKey: ["mediaData", kind, type],
-    queryFn: ({ pageParam = 1 }) => Data(pageParam, type, kind),
-    getNextPageParam: (lastPage, allPages) => {
-      // Return the next page number, or undefined to indicate the end
-      return lastPage.page < lastPage.total_pages
-        ? allPages.length + 1
-        : undefined;
+    queryKey: ["mediaData", Title, type, Genres],
+    queryFn: ({ pageParam = 1 }) => {
+      if (Genres) {
+        return searchByGenres(Title, Genres, pageParam);
+      }
+      return Data(pageParam, type, Title);
     },
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.page < lastPage.total_pages ? allPages.length + 1 : undefined,
     initialPageParam: 1,
   });
 
-  // Reset query when type changes
-  const handleTypeChange = (newType: string) => {
-    setType(newType);
+  const handleTypeChange = (newType: string) => setType(newType);
+  const handleKindChange = (newKind: string) => {
+    setGenres("");
+    setTitle(newKind);
   };
+  const handleGenresChange = (newGenres: string) => setGenres(newGenres);
 
-  // Extract all movies or TV series from the paginated data
   const allMedia = data?.pages.flatMap((page) => page.results) || [];
-  const movies = kind === "movie" ? (allMedia as Movie[]) : [];
-  const series = kind === "tv" ? (allMedia as TVSeries[]) : [];
+  const movies = Title === "movie" ? (allMedia as Movie[]) : [];
+  const series = Title === "tv" ? (allMedia as TVSeries[]) : [];
 
-  // Custom loader that triggers loading next page
   const handleLoadMore = () => {
-    if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
+    if (hasNextPage && !isFetchingNextPage) fetchNextPage();
   };
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <Heading text={title || Main || ""} />
-        <SelectShared kind={kind || "movie"} setType={handleTypeChange} />
+      <div
+        className={`flex items-start flex-col ${
+          explore ? "md:pt-10" : ""
+        } sm:flex-row sm:items-center justify-between`}
+      >
+        <Heading text={Title || Main || ""} />
+        {explore ? (
+          <div className="flex items-center flex-col md:flex-row gap-3">
+            <SelectType kind={Title || "movie"} setKind={handleKindChange} />
+            <SelectGenres
+              kind={Title || "movie"}
+              value={Genres}
+              Title={Title}
+              setType={handleGenresChange}
+            />
+          </div>
+        ) : (
+          <SelectShared kind={kind || "movie"} setType={handleTypeChange} />
+        )}
       </div>
 
       {isLoading && <Loader />}
@@ -70,12 +95,24 @@ export default function Main({
 
       {!isLoading && !isError && (
         <>
-          {kind === "movie" && <ItemsMovie Movies={movies} />}
-          {kind === "tv" && <ItemsSeries Series={series} />}
+          {Title === "movie" && <ItemsMovie Movies={movies} />}
+          {Title === "tv" && <ItemsSeries Series={series} />}
           <Loader setPage={handleLoadMore} />
-          {isFetchingNextPage && <div>Loading more...</div>}
         </>
       )}
     </div>
+  );
+}
+
+// ✅ Top-level component wrapped in Suspense
+export default function MainWrapper(props: {
+  explore?: boolean;
+  Main?: string;
+  kind?: string;
+}) {
+  return (
+    <Suspense fallback={<Loader />}>
+      <MainContent {...props} />
+    </Suspense>
   );
 }
