@@ -70,9 +70,7 @@ function MainContent({
   return (
     <div>
       <div
-        className={`flex items-start flex-col ${
-          explore ? "md:pt-10" : ""
-        } sm:flex-row sm:items-center justify-between`}
+        className={`flex items-start md:pt-10" flex-col sm:flex-row sm:items-center justify-between`}
       >
         <Heading text={Title || Main || ""} />
         {explore ? (
