@@ -56,7 +56,7 @@ export function Model({ className }: { className?: string }) {
         {/* Trigger button */}
         <AlertDialogTrigger className={cn(className, "")} asChild>
           <Button
-            className="relative shadow-xl rounded-full px-2"
+            className="relative shadow-xs rounded-full px-2"
             variant="outline"
           >
             <Input
@@ -79,7 +79,7 @@ export function Model({ className }: { className?: string }) {
                   onClick={() => setKind(search.value)}
                   className={`${
                     kind === search.value ? "border-b-2 border-primary" : ""
-                  } flex gap-2 text-base cursor-pointer items-center
+                  } flex gap-2 dark:text-white text-base cursor-pointer items-center
                     justify-center p-4 rounded-t-lg activegroup`}
                 >
                   {search.icon}
@@ -92,7 +92,9 @@ export function Model({ className }: { className?: string }) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="dark:text-white ">
+              Cancel
+            </AlertDialogCancel>
             <AlertDialogAction>Continue</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

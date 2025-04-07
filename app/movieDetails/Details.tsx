@@ -101,7 +101,7 @@ export default function Details({
                 </div>
               </div>
               <p className="bg-transparent gap-3 flex  text-nowrap  items-center backdrop-blur-3xl border border-white/30 px-5 py-2 lg:text-sm mBlur borderGlass rounded-3xl  text-white font-medium">
-                Watch her :
+                Watch Now :
                 <span className="p-1 hover:scale-105 shadow duration-300 transition-all cursor-pointer bg-white rounded-full">
                   <a
                     href={`https://www.youtube.com/watch?v=${video}`}

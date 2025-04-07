@@ -58,7 +58,7 @@ export const Search = ({
 
       <div
         className={cn(
-          "grid grid-cols-2 sm:grid-cols-3 overflow-y-auto md:max-h-[400px] max-h-[300px] gap-4 mt-1",
+          "grid grid-cols-2 sm:grid-cols-3  custom-scrollbar overflow-y-auto md:max-h-[400px] max-h-[300px] gap-4 mt-1",
           className
         )}
       >
