@@ -48,7 +48,7 @@ export default async function LayoutBG({
       >
         {/* Dark overlay for better readability */}
         <div
-          className="backdrop-blur-sm"
+          className="backdrop-blur-sm "
           style={{
             position: "absolute",
             top: 0,

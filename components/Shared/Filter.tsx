@@ -33,7 +33,7 @@ export default function Filter({
   const genres = data?.genres || [];
 
   return (
-    <div className="py-4">
+    <div className="py-4 pt-8">
       <Heading text={title || ""} />
 
       {/* Loading state */}
@@ -47,7 +47,7 @@ export default function Filter({
       )}
 
       {/* Display genres */}
-      <div className="flex flex-wrap justify-start gap-4 items-center">
+      <div className="flex flex-wrap justify-start  gap-4 items-center">
         {genres.map((genre) => (
           <Link
             key={genre.id}
