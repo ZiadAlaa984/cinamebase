@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Cinema Base - Movie & TV Series Discovery Platform
+Project Overview
+Cinema Base is a modern, responsive web application built with Next.js, shadcn/ui, and React Query, designed to help users discover movies and TV series. The platform integrates with The Movie Database (TMDB) API to fetch real-time data, offering features like filtering, searching, and detailed media exploration.
 
-## Getting Started
+🔹 Key Features
+✅ Multi-Filter Homepage
 
-First, run the development server:
+Filter by Movies or TV Shows
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Sort by Now Playing, Upcoming, Top Rated, Popular
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Browse by Genres
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✅ Dark/Light Mode Toggle
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Smooth theme switching using shadcn/ui and next-themes
 
-## Learn More
+✅ Advanced Search Functionality
 
-To learn more about Next.js, take a look at the following resources:
+Search for movies/series by name in the navbar
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+✅ Dedicated Movie & Series Pages
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Movies Page: Filter by genres and categories (Now Playing, Upcoming, etc.)
 
-## Deploy on Vercel
+Series Page: Additional filters like "Airing Today"
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ Explore Page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Unified search for both movies & series
+
+Filter by genres
+
+✅ Detailed Media Pages
+
+Movie/Series Details: Overview, cast, trailers, and recommendations
+
+Series-Specific Features: Season breakdown with episode lists
+
+Video Integration: Embedded trailers and clips
+
+🛠️ Tech Stack
+Frontend: Next.js (App Router)
+
+UI Components: shadcn/ui (Radix + TailwindCSS)
+
+State Management: React Query (for API data fetching & caching)
+
+API: The Movie Database (TMDB)
+
+Styling: TailwindCSS
+
+Dark Mode: next-themes
+
+Deployment: Vercel
+
+🚀 Key Implementation Highlights
+1. Dynamic Data Fetching with React Query
+Efficiently fetches and caches movie/series data
+
+Reduces unnecessary API calls with stale-while-revalidate strategy
+
+2. Responsive UI with shadcn/ui
+Pre-built, accessible components (tabs, dropdowns, cards)
+
+Customizable theme (dark/light mode)
+
+3. Optimized Performance
+Lazy loading for images
+
+Server-side rendering (SSR) for SEO-friendly pages
+
+Incremental Static Regeneration (ISR) for frequently updated data
+
+4. Intuitive Navigation & Filtering
+URL-based filtering (e.g., /movies?genre=action)
+
+Debounced search for better performance
