@@ -81,12 +81,8 @@ export const Search = ({
                   height={100}
                   className="w-full h-[200px] object-cover"
                 />
-                <div className="p-1 text-[10px]">
-                  {(item.title || item.name || "Untitled")
-                    .split(" ")
-                    .slice(0, 2)
-                    .join(" ")}{" "}
-                  ...
+                <div className="p-1 text-[10px] line-clamp-1">
+                  {item.title || item.name}
                 </div>
               </Link>
             </div>

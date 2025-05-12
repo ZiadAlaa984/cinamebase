@@ -30,15 +30,15 @@ export default function ItemSerie({ Serie }: { Serie: TVSeries }) {
                 alt={Serie?.name || "Unknown"}
                 width={500}
                 height={100}
-                className="  object-fill object-bottom   w-full max-h-[300px]"
+                className="   object-cover   w-full max-h-[300px]"
               />
             </CardHeader>
             <CardContent className="flex flex-col p-2 sm:p-3 gap-2 items-start">
-              <h3 className="text-[1.35rem] text-nowrap font-semibold tracking-tight">
-                {Serie?.name.split(" ").slice(0, 2).join(" ") || "Unknown"}
+              <h3 className=" text-base xl:text-[1.35rem]  line-clamp-1  font-semibold">
+                {Serie?.name}
               </h3>
-              <p className="text-xs max-h-3  overflow-hidden sm:text-muted-foreground">
-                {Serie?.overview.slice(0, 28) || "Unknown"} ...
+              <p className="text-xs line-clamp-1 max-h-3  overflow-hidden sm:text-muted-foreground">
+                {Serie?.overview}
               </p>
               <Button size={"sm"}>
                 <Link

@@ -30,6 +30,7 @@ export default async function Page({
   const englishLogo = imageData.logos.find(
     (logo: logo) => logo.iso_639_1 === "en"
   );
+  console.log("🚀 ~ castArray:", castArray);
   return (
     <LayoutBG
       gap="gap-0"
@@ -47,7 +48,7 @@ export default async function Page({
         <div className="sliderCast">
           <Heading text="Movie Cast" />
           <div className="mt-4 flex justify-center items-center">
-            <SliderCast cast={castArray} />
+            <SliderCast cast={castArray?.cast} />
           </div>
         </div>
         <div className="Recommended">

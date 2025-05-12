@@ -30,15 +30,15 @@ export default function ItemMovie({ Movie }: { Movie: Movie }) {
                 alt={Movie?.title || "Unknown"}
                 width={500}
                 height={100}
-                className="  object-fill object-bottom   w-full max-h-[300px]"
+                className="  object-cover    w-full max-h-[300px]"
               />
             </CardHeader>
             <CardContent className="flex flex-col p-2 sm:p-3 gap-2  items-start">
-              <h3 className="text-sm md:text-base text-nowrap font-semibold tracking-tight">
-                {Movie?.title.split(" ").slice(0, 3).join(" ") || "Unknown"}
+              <h3 className="text-base xl:text-[1.35rem]   line-clamp-1 md:text-base  font-semibold">
+                {Movie?.title}
               </h3>
-              <p className="text-xs  max-h-3  overflow-hidden sm:text-muted-foreground">
-                {Movie?.overview.slice(0, 36) || "Unknown"} ...
+              <p className="text-xs line-clamp-1    overflow-hidden sm:text-muted-foreground">
+                {Movie?.overview}
               </p>
               <Button size={"sm"}>
                 <Link
